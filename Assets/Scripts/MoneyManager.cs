@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    private int currentPlayerMoney;
+    public int currentPlayerMoney;
     public int starterMoney;
 
     public void Start()
@@ -20,6 +20,7 @@ public class MoneyManager : MonoBehaviour
     public void AddMoney(int amount)
     {
         currentPlayerMoney += amount;
+        Debug.Log("Added " + amount + " to player's money! Total: " + currentPlayerMoney);
     }
 
     public void RemoveMoney(int amount)

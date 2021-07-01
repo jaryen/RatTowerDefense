@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float enemyHealth;
-    [SerializeField] private float movementSpeed;
+    public MoneyManager moneyManager;
 
-    private int killReward; // Amount of money player gains when enemy killed
-    private int damage; // The amount of damage enemy does when it reaches end
+    [SerializeField] private float enemyHealth;
+    [SerializeField] private float movementSpeed = 0;
+    [SerializeField] private int killReward = 0; // Amount of money player gains when enemy killed
+    [SerializeField] private int damage; // The amount of damage enemy does when it reaches end
 
     private GameObject targetTile;
 
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        moneyManager = FindObjectOfType(typeof(MoneyManager)) as MoneyManager;
         initializeEnemy();
     }
 
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour
     {
         Enemies.enemies.Remove(gameObject);
         Destroy(transform.gameObject);
+        moneyManager.AddMoney(killReward); // Give money to player
     }
 
     private void moveEnemy()
@@ -57,15 +60,29 @@ public class Enemy : MonoBehaviour
             {
                 int currentIndex = MapGenerator.pathTiles.IndexOf(targetTile);
 
-                // Debug.Log("Added a tile to targetTile");
                 targetTile = MapGenerator.pathTiles[currentIndex + 1];
             }
         }
+    }
+
+    // destroy the enemy and return true
+    // when reached end of track
+    public bool enemyReachedEnd()
+    {
+        if (transform.position == MapGenerator.endTile.transform.position)
+        {
+            Enemies.enemies.Remove(gameObject);
+            Destroy(transform.gameObject);
+            return true;
+        }
+
+        return false;
     }
 
     private void Update()
     {
         checkPosition();
         moveEnemy();
+        enemyReachedEnd();
     }
 }

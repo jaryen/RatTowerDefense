@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlacementManager : MonoBehaviour
 {
     public ShopManager shopManager;
-    public GameObject basicTowerObject;
+    public GameObject dummyTowerObject;
+    public GameObject actualTower;
 
     private GameObject dummyPlacement;
-    public GameObject hoverTile;
+    private GameObject hoverTile;
 
     public Camera cam;
     public LayerMask mask;
@@ -38,8 +39,8 @@ public class PlacementManager : MonoBehaviour
 
         // Sets all of the object collisions by the raycast
         // to "hit".
-        // LayerMask mask = "Everything", meaning every gameobject
-        // in the raycast is detected.
+        // LayerMask mask = Every gameobject
+        // in the raycast is detected EXCEPT for dummy tower.
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, new Vector2(0, 0), 0.1f, mask, -100, 100);
 
         if (hit.collider != null)
@@ -88,19 +89,23 @@ public class PlacementManager : MonoBehaviour
             // If there's no tower in the current tile
             if (checkForTower() == false)
             {
-                if (shopManager.CanBuyTower(basicTowerObject) == true)
+                if (shopManager.CanBuyTower(actualTower) == true)
                 {
-                    GameObject newTowerObject = Instantiate(basicTowerObject);
+                    GameObject newTowerObject = Instantiate(actualTower);
                     newTowerObject.layer = LayerMask.NameToLayer("Tower");
                     newTowerObject.transform.position = hoverTile.transform.position;
 
                     EndBuilding();
-                    shopManager.BuyTower(basicTowerObject);
+                    shopManager.BuyTower(actualTower);
                 }
                 else
                 {
                     Debug.Log("Not enough money!");
                 }
+            }
+            else
+            {
+                Debug.Log("A tower is already here.");
             }
         }
     }
@@ -110,14 +115,7 @@ public class PlacementManager : MonoBehaviour
     public void StartBuilding()
     {
         isBuilding = true;
-        dummyPlacement = Instantiate(basicTowerObject, GetMousePosition(), Quaternion.identity);
-        Debug.Log("Spawned new hover tower at: " + dummyPlacement.transform.position);
-
-        // Make the hover tower transparent
-        SpriteRenderer dummySR = dummyPlacement.GetComponent<SpriteRenderer>();
-        Color dummyCol = dummySR.color;
-        dummyCol.a = 0.5f;
-        Debug.Log(dummyCol.a); // Not working!
+        dummyPlacement = Instantiate(dummyTowerObject, GetMousePosition(), Quaternion.identity);
 
         // Destroy the tower and barrel rotation scripts
         // attached to the dummy tower object
@@ -163,7 +161,6 @@ public class PlacementManager : MonoBehaviour
                 {
                     // Move the dummy tower at mouse position (no matter where)
                     dummyPlacement.transform.position = GetMousePosition();
-                    Debug.Log("Your mouse is not covering a map tile");
                 }
             }
 
