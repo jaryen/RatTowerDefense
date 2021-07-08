@@ -56,6 +56,11 @@ public class Tower : MonoBehaviour
         enemyScript.takeDamage(damage);
     }
 
+    private void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
+
     private void Update()
     {
         updateNearestEnemy();

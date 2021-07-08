@@ -7,7 +7,7 @@ public class MoneyManager : MonoBehaviour
     public int currentPlayerMoney;
     public int starterMoney;
 
-    public void Start()
+    private void Start()
     {
         currentPlayerMoney = starterMoney;
     }

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoundController : MonoBehaviour
 {
     public GameObject basicEnemy;
-
+    public Text waveNum;
+    
     public float timeBetweenWaves;
     public float timeBeforeRoundStarts;
     public float timeVariable;
@@ -21,9 +23,7 @@ public class RoundController : MonoBehaviour
         isRoundGoing = false;
         isIntermission = false;
         isStartOfRound = true;
-
         timeVariable = Time.time + timeBeforeRoundStarts;
-        
         round = 1;
     }
 
@@ -43,32 +43,31 @@ public class RoundController : MonoBehaviour
 
     private void Update()
     {
+        waveNum.text = "Wave: " + round.ToString();
+
         if (isStartOfRound)
         {
             if (Time.time >= timeVariable)
             {
                 isStartOfRound = false;
                 isRoundGoing = true;
+
+                spawnEnemies();
             }
         } 
         else if (isIntermission)
         {
+            // If timeBetweenWaves amount of time has passed
+            // from previous round
             if (Time.time >= timeVariable)
             {
                 isIntermission = false;
-                isRoundGoing = true;
-
-                spawnEnemies();
+                isStartOfRound = true;
             }
         }
         else if (isRoundGoing)
         {
-            if (Enemies.enemies.Count > 0)
-            {
-                // Check amount of enemies remaining
-
-            }
-            else
+            if (Enemies.enemies.Count <= 0)
             {
                 isIntermission = true;
                 isRoundGoing = false;

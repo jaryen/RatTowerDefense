@@ -5,11 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public MoneyManager moneyManager;
+    public HealthManager healthManager;
 
     [SerializeField] private float enemyHealth;
     [SerializeField] private float movementSpeed = 0;
     [SerializeField] private int killReward = 0; // Amount of money player gains when enemy killed
-    [SerializeField] private int damage; // The amount of damage enemy does when it reaches end
+    [SerializeField] private int damage = 0; // The amount of damage enemy does when it reaches end
 
     private GameObject targetTile;
 
@@ -20,7 +21,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        moneyManager = FindObjectOfType(typeof(MoneyManager)) as MoneyManager;
+        moneyManager = FindObjectOfType<MoneyManager>();
+        healthManager = FindObjectOfType<HealthManager>();
         initializeEnemy();
     }
 
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
         if (enemyHealth <= 0)
         {
             die();
+            moneyManager.AddMoney(killReward); // Give money to player
         }
     }
 
@@ -42,7 +45,6 @@ public class Enemy : MonoBehaviour
     {
         Enemies.enemies.Remove(gameObject);
         Destroy(transform.gameObject);
-        moneyManager.AddMoney(killReward); // Give money to player
     }
 
     private void moveEnemy()
@@ -67,12 +69,11 @@ public class Enemy : MonoBehaviour
 
     // destroy the enemy and return true
     // when reached end of track
-    public bool enemyReachedEnd()
+    private bool enemyReachedEnd()
     {
         if (transform.position == MapGenerator.endTile.transform.position)
         {
-            Enemies.enemies.Remove(gameObject);
-            Destroy(transform.gameObject);
+            die();
             return true;
         }
 
@@ -83,6 +84,10 @@ public class Enemy : MonoBehaviour
     {
         checkPosition();
         moveEnemy();
-        enemyReachedEnd();
+
+        if (enemyReachedEnd())
+        {
+            healthManager.takeDamage(damage);
+        }
     }
 }

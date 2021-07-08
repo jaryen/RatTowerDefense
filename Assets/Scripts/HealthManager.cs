@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    Enemy enemy;
+    public GameOverScreen gameOverScreen;
 
-    public int startingHealth;
+    [SerializeField] public int startingHealth;
     private int currentHealth;
 
-    public void Start()
+    private void Start()
     {
-        enemy = FindObjectOfType(typeof(Enemies)) as Enemy;
         currentHealth = startingHealth;
     }
 
-    private void takeDamage()
+    public void takeDamage(int amount)
     {
-        currentHealth--;
+        currentHealth -= amount;
+        Debug.Log("You lost " + amount + " health!" + " Health: " + currentHealth);
+/*
+        if (currentHealth <= 0)
+        {
+            healthGone();
+        }*/
     }
 
-    public void Update()
+    public void healthGone()
     {
-        if (enemy.enemyReachedEnd())
-        {
-            takeDamage();
-        }
+        gameOverScreen.Setup();
     }
 }

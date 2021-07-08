@@ -28,6 +28,8 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
+        mapTiles.Clear();
+        pathTiles.Clear();
         generateMap();
     }
 
@@ -39,7 +41,6 @@ public class MapGenerator : MonoBehaviour
         {
             edgeTiles.Add(mapTiles[i]);
         }
-
         return edgeTiles;
     }
 
@@ -54,17 +55,9 @@ public class MapGenerator : MonoBehaviour
         return edgeTiles;
     }
 
-    private void moveDown()
-    {
-        pathTiles.Add(currentTile);
-        currentIndex = mapTiles.IndexOf(currentTile);
-        nextIndex = currentIndex-mapWidth;
-        currentTile = mapTiles[nextIndex];
-    }
-
     private void moveLeft()
     {
-        // Add the current tile into the path
+        // Add the current tile into the path tiles list
         pathTiles.Add(currentTile);
         // Get the index of the current tile
         currentIndex = mapTiles.IndexOf(currentTile);
@@ -78,6 +71,14 @@ public class MapGenerator : MonoBehaviour
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
         nextIndex = currentIndex+1;
+        currentTile = mapTiles[nextIndex];
+    }
+
+    private void moveDown()
+    {
+        pathTiles.Add(currentTile);
+        currentIndex = mapTiles.IndexOf(currentTile);
+        nextIndex = currentIndex - mapWidth;
         currentTile = mapTiles[nextIndex];
     }
 
@@ -109,12 +110,12 @@ public class MapGenerator : MonoBehaviour
 
         // Move down by a random amount in the 
         // beginning
-        int randNum = Random.Range(1, mapWidth/2);
+        int randNum = Random.Range(1, mapHeight/2);
         for (int i = 0; i < randNum; i++)
         {
             moveDown();
         }
-
+        
         int loopCount = 0;
         while (!reachedX)
         {
@@ -124,11 +125,10 @@ public class MapGenerator : MonoBehaviour
                 Debug.Log("Loop ran too long! Broke out of it!");
                 break;
             }
-
             if (currentTile.transform.position.x > endTile.transform.position.x)
             {
                 moveLeft();
-            } 
+            }
             else if (currentTile.transform.position.x < endTile.transform.position.x)
             {
                 moveRight();
