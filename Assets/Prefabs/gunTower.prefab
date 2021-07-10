@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8244050248893815102}
   - component: {fileID: 7127276801965594519}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1513171567403315797}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3713141965605631128}
   - component: {fileID: 4069299215307471789}
   - component: {fileID: -3414617884012742611}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: gunTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
