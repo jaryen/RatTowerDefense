@@ -18,11 +18,11 @@ public class HealthManager : MonoBehaviour
     {
         currentHealth -= amount;
         Debug.Log("You lost " + amount + " health!" + " Health: " + currentHealth);
-/*
+
         if (currentHealth <= 0)
         {
             healthGone();
-        }*/
+        }
     }
 
     public void healthGone()

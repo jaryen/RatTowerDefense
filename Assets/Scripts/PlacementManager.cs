@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlacementManager : MonoBehaviour
 {
     public ShopManager shopManager;
-    public GameObject dummyTowerObject;
-    public GameObject actualTower;
+    public SelectionIndicator selectionIndicator;
 
+    public GameObject dummyTower;
+    public GameObject actualTower;
     private GameObject dummyPlacement;
     private GameObject hoverTile;
 
@@ -19,7 +20,7 @@ public class PlacementManager : MonoBehaviour
 
     public void Start()
     {
-        // StartBuilding();
+        // Do something?
     }
 
     // Gets the current position of the mouse
@@ -82,7 +83,7 @@ public class PlacementManager : MonoBehaviour
         return towerOnSlot;
     }
 
-    public void placeBuilding()
+    public void PlaceBuilding()
     {
         if (hoverTile != null)
         {
@@ -115,7 +116,7 @@ public class PlacementManager : MonoBehaviour
     public void StartBuilding()
     {
         isBuilding = true;
-        dummyPlacement = Instantiate(dummyTowerObject, GetMousePosition(), Quaternion.identity);
+        dummyPlacement = Instantiate(dummyTower, GetMousePosition(), Quaternion.identity);
 
         // Destroy the tower and barrel rotation scripts
         // attached to the dummy tower object
@@ -136,6 +137,19 @@ public class PlacementManager : MonoBehaviour
         if (dummyPlacement != null)
         {
             Destroy(dummyPlacement);
+        }
+    }
+
+    public void DeleteTower()
+    {
+        if (selectionIndicator.selectedObject != null)
+        {
+            Destroy(selectionIndicator.selectedObject.gameObject);
+            Debug.Log("Destroyed turret");
+        }
+        else
+        {
+            Debug.Log("Please select a tower to delete");
         }
     }
 
@@ -166,7 +180,7 @@ public class PlacementManager : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                placeBuilding();
+                PlaceBuilding();
             }
         }
     }

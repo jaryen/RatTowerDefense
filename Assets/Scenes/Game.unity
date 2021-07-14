@@ -670,7 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 603763}
-  dummyTowerObject: {fileID: 6713285909116720003, guid: a3462366e0affc24fbf682e3f7ee2c35,
+  selectionIndicator: {fileID: 1199475577}
+  dummyTower: {fileID: 6713285909116720003, guid: a3462366e0affc24fbf682e3f7ee2c35,
     type: 3}
   actualTower: {fileID: 6713285909116720003, guid: f62be888232d04149bf896903418cb4f,
     type: 3}
@@ -1139,6 +1140,7 @@ GameObject:
   - component: {fileID: 1032672444}
   - component: {fileID: 1032672443}
   - component: {fileID: 1032672442}
+  - component: {fileID: 1032672445}
   m_Layer: 5
   m_Name: Delete Tower Button
   m_TagString: Untagged
@@ -1208,7 +1210,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1032672443}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 516574562}
+        m_MethodName: DeleteTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1032672443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,6 +1259,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032672440}
   m_CullTransparentMesh: 0
+--- !u!65 &1032672445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032672440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1123882244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1299,7 @@ RectTransform:
   m_GameObject: {fileID: 1123882244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 825112206}
   - {fileID: 1032672441}
@@ -1282,7 +1308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -60, y: 65}
+  m_AnchoredPosition: {x: -101.1, y: 169.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123882246
@@ -1298,17 +1324,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 50}
-  m_Spacing: {x: 2, y: 2}
-  m_Constraint: 1
-  m_ConstraintCount: 1
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!222 &1123882247
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1476,11 +1502,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36dba62229635b4eb3cf64405631415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementManager: {fileID: 516574562}
   hoveredObject: {fileID: 0}
   selectedObject: {fileID: 0}
   towerMask:
     serializedVersion: 2
     m_Bits: 256
+  UIMask:
+    serializedVersion: 2
+    m_Bits: 32
 --- !u!4 &1199475578
 Transform:
   m_ObjectHideFlags: 0
