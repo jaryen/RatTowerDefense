@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SelectionIndicator : MonoBehaviour
 {
-    public PlacementManager placementManager;
+    //public PlacementManager placementManager;
 
     public GameObject hoveredObject;
     public GameObject selectedObject;

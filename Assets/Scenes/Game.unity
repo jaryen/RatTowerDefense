@@ -553,7 +553,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Delete
+  m_Text: Sell Tower
 --- !u!222 &453685120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1494,9 +1494,6 @@ MonoBehaviour:
   towerMask:
     serializedVersion: 2
     m_Bits: 256
-  UIMask:
-    serializedVersion: 2
-    m_Bits: 32
 --- !u!4 &1199475578
 Transform:
   m_ObjectHideFlags: 0

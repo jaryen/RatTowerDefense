@@ -144,6 +144,7 @@ public class PlacementManager : MonoBehaviour
     {
         if (selectionIndicator.selectedObject != null)
         {
+            shopManager.SellTower(actualTower);
             Destroy(selectionIndicator.selectedObject.gameObject);
         }
         else
