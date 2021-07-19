@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
     public int currentPlayerMoney;
     public int starterMoney;
-
+    public Text moneyText;
+    private void Update() {
+        moneyText.text = "MONEY : " + currentPlayerMoney;
+    }
     private void Start()
     {
         currentPlayerMoney = starterMoney;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public class HealthManager : MonoBehaviour
     {
         currentHealth -= amount;
         Debug.Log("You lost " + amount + " health!" + " Health: " + currentHealth);
-
-        if (currentHealth <= 0)
-        {
-            healthGone();
-        }
+        //
+        //if (currentHealth <= 0)
+        //{
+        //    healthGone();
+        //}
     }
 
     public void healthGone()
