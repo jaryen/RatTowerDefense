@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class BasicTower : Tower
 {
+    [Header("Unity Setup Fields")]
     public Transform pivot;
     public Transform barrel;
     public GameObject bullet;
 
-    protected override void shoot()
+    protected override void Shoot()
     {
-        base.shoot();
         GameObject newBullet = Instantiate(bullet, barrel.position, pivot.rotation);
+        Bullet bulletScript = newBullet.GetComponent<Bullet>();
+
+        if (bulletScript != null)
+        {
+            bulletScript.Seek(currentTarget.transform);
+        }
     }
 }

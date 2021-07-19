@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public MoneyManager moneyManager;
     public HealthManager healthManager;
 
+    [Header("Attributes")]
     [SerializeField] private float enemyHealth;
     [SerializeField] private float movementSpeed = 0;
     [SerializeField] private int killReward = 0; // Amount of money player gains when enemy killed
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
         targetTile = MapGenerator.startTile;
     }
 
-    public void takeDamage(float amount)
+    public void TakeDamage(float amount)
     {
         enemyHealth -= amount;
         if (enemyHealth <= 0)

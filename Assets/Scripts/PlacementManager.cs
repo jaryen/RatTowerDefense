@@ -90,10 +90,10 @@ public class PlacementManager : MonoBehaviour
             // If there's no tower in the current tile
             if (checkForTower() == false)
             {
-                if (shopManager.CanBuyTower(actualTower) == true)
+                if (shopManager.CanBuyTower(actualTower))
                 {
                     GameObject newTowerObject = Instantiate(actualTower);
-                    newTowerObject.layer = LayerMask.NameToLayer("Tower");
+                    // newTowerObject.layer = LayerMask.NameToLayer("Tower");
                     newTowerObject.transform.position = hoverTile.transform.position;
 
                     EndBuilding();
@@ -144,8 +144,8 @@ public class PlacementManager : MonoBehaviour
     {
         if (selectionIndicator.selectedObject != null)
         {
+            shopManager.SellTower(actualTower);
             Destroy(selectionIndicator.selectedObject.gameObject);
-            Debug.Log("Destroyed turret");
         }
         else
         {

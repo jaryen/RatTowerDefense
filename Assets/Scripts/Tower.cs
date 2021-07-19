@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    [Header("Attributes")]
     [SerializeField] private float range = 0;
-    [SerializeField] private float damage = 0;
+    //[SerializeField] private float damage = 0;
     [SerializeField] private float timeBetweenShots = 0; // Time in seconds between shots
     private float nextTimeToShoot;
 
@@ -17,10 +18,9 @@ public class Tower : MonoBehaviour
     }
 
     // Gets the current nearest enemy to tower
-    private void updateNearestEnemy()
+    private void UpdateNearestEnemy()
     {
         GameObject currentNearestEnemy = null;
-
         float distance = Mathf.Infinity;
 
         // Gets distance from tower's position to each enemy in play
@@ -49,16 +49,21 @@ public class Tower : MonoBehaviour
 
     // Protected: any class that derives from Tower can use
     // this function
-    protected virtual void shoot()
+    protected virtual void Shoot()
     {
-        // Get a game object of type Enemy
-        Enemy enemyScript = currentTarget.GetComponent<Enemy>();
-        enemyScript.takeDamage(damage);
+ /*       Enemy enemyScript = currentTarget.GetComponent<Enemy>();
+        enemyScript.TakeDamage(damage);*/
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 
     private void Update()
     {
-        updateNearestEnemy();
+        UpdateNearestEnemy();
 
         // Checks if the tower shoot cooldown
         // is ready.
@@ -66,8 +71,7 @@ public class Tower : MonoBehaviour
         {
             if (currentTarget)
             {
-                // Debug.Log("You have reached shoot");
-                shoot();
+                Shoot();
                 nextTimeToShoot = Time.time + timeBetweenShots;
             }
         }

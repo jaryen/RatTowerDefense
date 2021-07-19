@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectionIndicator : MonoBehaviour
 {
-    public PlacementManager placementManager;
+    //public PlacementManager placementManager;
 
     public GameObject hoveredObject;
     public GameObject selectedObject;
     public LayerMask towerMask;
-    public LayerMask UIMask;
 
     private Color originalCol;
 
@@ -93,8 +93,6 @@ public class SelectionIndicator : MonoBehaviour
         Vector2 mousePosition = GetMousePosition();
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, new Vector2(0, 0), 0.1f, towerMask, -100, 100);
 
-        RaycastHit2D hitUI = Physics2D.Raycast(mousePosition, new Vector2(0, 0), 0.1f, UIMask, -100, 100);
-
         if (hit.collider != null)
         {
             // Get the gameobject corresponding to the tower hit by ray
@@ -112,15 +110,11 @@ public class SelectionIndicator : MonoBehaviour
                 SelectObject(hitObject);
             }
         }
-        else if (hitUI.collider != null)
-        {
-            Debug.Log("Hit UI element");
-        }
         else
         {
             ClearHover();
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 if (selectedObject != null)
                 {
