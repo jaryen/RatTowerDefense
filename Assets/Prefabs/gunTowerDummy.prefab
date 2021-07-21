@@ -122,11 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6713285909116720001}
   - component: {fileID: 6713285909116720002}
-  - component: {fileID: 3713141965605631128}
-  - component: {fileID: 4069299215307471789}
   - component: {fileID: -3414617884012742611}
   m_Layer: 9
-  m_Name: guntTowerDummy
+  m_Name: gunTowerDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,40 +195,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3713141965605631128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6713285909116720003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c13ac58a0b99bf4d9ee0c3d175f082a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 5
-  damage: 25
-  timeBetweenShots: 1
-  currentTarget: {fileID: 0}
-  pivot: {fileID: 1513171567403315797}
-  barrel: {fileID: 8244050248893815102}
-  bullet: {fileID: 1000223910692300365, guid: 3b6d44cf54f69b44e92a067bf7a0c5e9, type: 3}
---- !u!114 &4069299215307471789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6713285909116720003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f4ff6d20f3ce541ac8dafc5dfe6659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pivot: {fileID: 1513171567403315797}
-  barrel: {fileID: 8244050248893815102}
-  tower: {fileID: 3713141965605631128}
 --- !u!61 &-3414617884012742611
 BoxCollider2D:
   m_ObjectHideFlags: 0

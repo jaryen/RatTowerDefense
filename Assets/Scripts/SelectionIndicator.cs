@@ -5,13 +5,19 @@ using UnityEngine.EventSystems;
 
 public class SelectionIndicator : MonoBehaviour
 {
-    //public PlacementManager placementManager;
-
+    [Header("Unity Setup Fields")]
     public GameObject hoveredObject;
     public GameObject selectedObject;
+    public Transform turretUI;
     public LayerMask towerMask;
 
     private Color originalCol;
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     public Vector3 GetMousePosition()
     {
@@ -108,6 +114,10 @@ public class SelectionIndicator : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 SelectObject(hitObject);
+                Transform selectedObjPos = selectedObject.transform;
+                Vector3 offsetPos = new Vector3(selectedObjPos.position.x, selectedObjPos.position.y + selectedObject.transform.localScale.y/2);
+                Vector3 screenPos = mainCamera.WorldToScreenPoint(offsetPos);
+                turretUI.position = screenPos;
             }
         }
         else

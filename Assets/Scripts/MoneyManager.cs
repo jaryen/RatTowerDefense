@@ -8,9 +8,11 @@ public class MoneyManager : MonoBehaviour
     public int currentPlayerMoney;
     public int starterMoney;
     public Text moneyText;
+
     private void Update() {
         moneyText.text = "MONEY : " + currentPlayerMoney;
     }
+
     private void Start()
     {
         currentPlayerMoney = starterMoney;

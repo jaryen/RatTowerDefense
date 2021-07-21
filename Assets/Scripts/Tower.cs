@@ -51,8 +51,6 @@ public class Tower : MonoBehaviour
     // this function
     protected virtual void Shoot()
     {
- /*       Enemy enemyScript = currentTarget.GetComponent<Enemy>();
-        enemyScript.TakeDamage(damage);*/
     }
 
     private void OnDrawGizmosSelected()

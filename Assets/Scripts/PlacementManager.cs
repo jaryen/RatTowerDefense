@@ -115,19 +115,14 @@ public class PlacementManager : MonoBehaviour
     // button is pressed.
     public void StartBuilding()
     {
+        if (dummyPlacement != null)
+        {
+            Debug.Log("You are already building a turret");
+            return;
+        }
+
         isBuilding = true;
         dummyPlacement = Instantiate(dummyTower, GetMousePosition(), Quaternion.identity);
-
-        // Destroy the tower and barrel rotation scripts
-        // attached to the dummy tower object
-        if (dummyPlacement.GetComponent<Tower>() != null)
-        {
-            Destroy(dummyPlacement.GetComponent<Tower>());
-        }
-        if (dummyPlacement.GetComponent<BarrelRotation>() != null)
-        {
-            Destroy(dummyPlacement.GetComponent<BarrelRotation>());
-        }
     }
 
     public void EndBuilding()
@@ -140,12 +135,16 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    public void DeleteTower()
+    public void SellTower()
     {
         if (selectionIndicator.selectedObject != null)
         {
             shopManager.SellTower(actualTower);
             Destroy(selectionIndicator.selectedObject.gameObject);
+        }
+        else if (isBuilding)
+        {
+            EndBuilding();
         }
         else
         {
