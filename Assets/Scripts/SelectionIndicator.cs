@@ -5,9 +5,10 @@ using UnityEngine.EventSystems;
 
 public class SelectionIndicator : MonoBehaviour
 {
-    [Header("Unity Setup Fields")]
     public GameObject hoveredObject;
     public GameObject selectedObject;
+
+    [Header("Unity Setup Fields")]
     public Transform turretUI;
     public LayerMask towerMask;
 

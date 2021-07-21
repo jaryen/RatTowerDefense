@@ -9,10 +9,6 @@ public class MoneyManager : MonoBehaviour
     public int starterMoney;
     public Text moneyText;
 
-    private void Update() {
-        moneyText.text = "MONEY : " + currentPlayerMoney;
-    }
-
     private void Start()
     {
         currentPlayerMoney = starterMoney;
@@ -33,5 +29,10 @@ public class MoneyManager : MonoBehaviour
     {
         currentPlayerMoney -= amount;
         Debug.Log("Removed " + amount + " from player's money! Remaining: " + currentPlayerMoney);
+    }
+
+    private void Update()
+    {
+        moneyText.text = "Money: $" + currentPlayerMoney;
     }
 }
