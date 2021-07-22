@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damage = 0; // The amount of damage enemy does when it reaches end
 
     private GameObject targetTile;
+    private Vector3 previousPos;
 
     private void Awake()
     {
@@ -24,10 +25,12 @@ public class Enemy : MonoBehaviour
     {
         moneyManager = FindObjectOfType<MoneyManager>();
         healthManager = FindObjectOfType<HealthManager>();
-        initializeEnemy();
+
+        previousPos = transform.position;
+        InitializeEnemy();
     }
 
-    private void initializeEnemy()
+    private void InitializeEnemy()
     {
         targetTile = MapGenerator.startTile;
     }
@@ -37,23 +40,46 @@ public class Enemy : MonoBehaviour
         enemyHealth -= amount;
         if (enemyHealth <= 0)
         {
-            die();
+            Die();
             moneyManager.AddMoney(killReward); // Give money to player
         }
     }
 
-    private void die()
+    private void Die()
     {
         Enemies.enemies.Remove(gameObject);
         Destroy(transform.gameObject);
     }
 
-    private void moveEnemy()
+    private void MoveEnemy()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetTile.transform.position, movementSpeed * Time.deltaTime);
+
+        // Set current direction
+        Vector3 currentPos = transform.position;
+
+        // Calculate direction
+        Vector3 currDir = (currentPos - previousPos).normalized;
+        Debug.Log("Current direction of rats: " + currDir);
+
+        // Set direction of the enemy
+        if (currDir == new Vector3(1,0,0)) // facing right
+        {
+            transform.rotation = Quaternion.Euler(0,0,90);
+        }
+        else if (currDir == new Vector3(-1,0,0)) // facing left
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        else if (currDir == new Vector3(0,-1,0)) // facing down
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        previousPos = currentPos;
     }
 
-    private void checkPosition()
+    private void CheckPosition()
     {
         if (targetTile != null && targetTile != MapGenerator.endTile)
         {
@@ -70,11 +96,11 @@ public class Enemy : MonoBehaviour
 
     // destroy the enemy and return true
     // when reached end of track
-    private bool enemyReachedEnd()
+    private bool EnemyReachedEnd()
     {
         if (transform.position == MapGenerator.endTile.transform.position)
         {
-            die();
+            Die();
             return true;
         }
 
@@ -83,10 +109,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        checkPosition();
-        moveEnemy();
+        CheckPosition();
+        MoveEnemy();
 
-        if (enemyReachedEnd())
+        if (EnemyReachedEnd())
         {
             healthManager.takeDamage(damage);
         }
