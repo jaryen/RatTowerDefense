@@ -9,7 +9,7 @@ public class PlacementManager : MonoBehaviour
 
     public GameObject dummyTower;
     public GameObject actualTower;
-    private GameObject dummyPlacement;
+    public GameObject dummyPlacement;
     private GameObject hoverTile;
 
     public Camera cam;
@@ -17,11 +17,6 @@ public class PlacementManager : MonoBehaviour
     public LayerMask towerMask;
 
     public bool isBuilding;
-
-    public void Start()
-    {
-        // Do something?
-    }
 
     // Gets the current position of the mouse
     public Vector3 GetMousePosition()

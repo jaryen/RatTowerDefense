@@ -18,6 +18,7 @@ public class SelectionIndicator : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        turretUI.gameObject.SetActive(false);
     }
 
     public Vector3 GetMousePosition()
@@ -119,6 +120,7 @@ public class SelectionIndicator : MonoBehaviour
                 Vector3 offsetPos = new Vector3(selectedObjPos.position.x, selectedObjPos.position.y + selectedObject.transform.localScale.y/2);
                 Vector3 screenPos = mainCamera.WorldToScreenPoint(offsetPos);
                 turretUI.position = screenPos;
+                turretUI.gameObject.SetActive(true);
             }
         }
         else
@@ -134,6 +136,11 @@ public class SelectionIndicator : MonoBehaviour
                     selectedObject = null;
                 }
             }
+        }
+
+        if (selectedObject == null)
+        {
+            turretUI.gameObject.SetActive(false);
         }
     }
 }
