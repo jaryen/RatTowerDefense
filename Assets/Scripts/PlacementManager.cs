@@ -4,19 +4,42 @@ using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
 {
-    public ShopManager shopManager;
-    public SelectionIndicator selectionIndicator;
-
-    public GameObject dummyTower;
-    public GameObject actualTower;
-    public GameObject dummyPlacement;
-    private GameObject hoverTile;
-
+    [Header("Unity Setup Fields")]
     public Camera cam;
     public LayerMask mask;
     public LayerMask towerMask;
+    public ShopManager shopManager;
+    public SelectionIndicator selectionIndicator;
 
+    [Header("Gun Tower Fields")]
+    public GameObject dummyTower;
+    public GameObject actualTower;
+
+    [Header("Laser Tower Fields")]
+    public GameObject dummyLaserTower;
+    public GameObject actualLaserTower;
+
+    [Header("During Game")]
     public bool isBuilding;
+    private GameObject hoverTile;
+    public GameObject currentTower;
+    public GameObject currentDummyTower;
+    public GameObject dummyPlacement;
+
+    // Select which tower to use
+    public void SetTower(GameObject tower)
+    {
+        currentTower = tower;
+
+        if (tower.name.Equals("gunTower"))
+        {
+            currentDummyTower = dummyTower;
+        } 
+        else if (tower.name.Equals("laserTower"))
+        {
+            currentDummyTower = dummyLaserTower;
+        }
+    }
 
     // Gets the current position of the mouse
     public Vector3 GetMousePosition()
@@ -29,7 +52,7 @@ public class PlacementManager : MonoBehaviour
 
     // Checks if the current tile is a valid space to 
     // place a tower on.
-    public void getCurrentHoverTile()
+    public void GetCurrentHovertile()
     {
         Vector2 mousePosition = GetMousePosition();
 
@@ -59,7 +82,7 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    public bool checkForTower()
+    public bool CheckForTower()
     {
         bool towerOnSlot = false;
 
@@ -83,16 +106,16 @@ public class PlacementManager : MonoBehaviour
         if (hoverTile != null)
         {
             // If there's no tower in the current tile
-            if (checkForTower() == false)
+            if (CheckForTower() == false)
             {
-                if (shopManager.CanBuyTower(actualTower))
+                if (shopManager.CanBuyTower(currentTower))
                 {
-                    GameObject newTowerObject = Instantiate(actualTower);
+                    GameObject newTowerObject = Instantiate(currentTower);
                     // newTowerObject.layer = LayerMask.NameToLayer("Tower");
                     newTowerObject.transform.position = hoverTile.transform.position;
 
                     EndBuilding();
-                    shopManager.BuyTower(actualTower);
+                    shopManager.BuyTower(currentTower);
                 }
                 else
                 {
@@ -117,7 +140,7 @@ public class PlacementManager : MonoBehaviour
         }
 
         isBuilding = true;
-        dummyPlacement = Instantiate(dummyTower, GetMousePosition(), Quaternion.identity);
+        dummyPlacement = Instantiate(currentDummyTower, GetMousePosition(), Quaternion.identity); // dummyTower = currentDummyTower
     }
 
     public void EndBuilding()
@@ -155,7 +178,7 @@ public class PlacementManager : MonoBehaviour
             {
                 // Get the current map tile the mouse is hovering
                 // over.
-                getCurrentHoverTile();
+                GetCurrentHovertile();
 
                 // If mouse is currently hovering over a map tile
                 if (hoverTile != null)

@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserTower : MonoBehaviour
+public class LaserTower : Tower
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Unity Setup Fields")]
+    public Transform pivot;
+    public Transform barrel;
+    public LineRenderer lineRenderer;
 
-    // Update is called once per frame
-    void Update()
+    protected override void Shoot()
     {
-        
+        lineRenderer.SetPosition(0, barrel.position);
+        lineRenderer.SetPosition(1, currentTarget.transform.position);
     }
 }

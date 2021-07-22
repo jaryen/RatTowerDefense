@@ -51,6 +51,7 @@ public class Tower : MonoBehaviour
     // this function
     protected virtual void Shoot()
     {
+        // Shoot
     }
 
     private void OnDrawGizmosSelected()

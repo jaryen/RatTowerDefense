@@ -60,7 +60,6 @@ public class Enemy : MonoBehaviour
 
         // Calculate direction
         Vector3 currDir = (currentPos - previousPos).normalized;
-        Debug.Log("Current direction of rats: " + currDir);
 
         // Set direction of the enemy
         if (currDir == new Vector3(1,0,0)) // facing right
