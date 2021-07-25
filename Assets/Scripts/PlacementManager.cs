@@ -18,6 +18,10 @@ public class PlacementManager : MonoBehaviour
     [Header("Laser Tower Fields")]
     public GameObject dummyLaserTower;
     public GameObject actualLaserTower;
+    
+    [Header("Gas Tower Fields")]
+    public GameObject dummyGasTower;
+    public GameObject actualGasTower;
 
     [Header("During Game")]
     public bool isBuilding;
@@ -38,6 +42,10 @@ public class PlacementManager : MonoBehaviour
         else if (tower.name.Equals("laserTower"))
         {
             currentDummyTower = dummyLaserTower;
+        }
+        else if (tower.name.Equals("gasTower"))
+        {
+            currentDummyTower = dummyGasTower;
         }
     }
 
