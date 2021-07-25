@@ -6,7 +6,6 @@ public class BarrelRotation : MonoBehaviour
 {
     public Transform pivot;
     public Transform barrel;
-
     public Tower tower;
 
     private void Update()

@@ -6,7 +6,6 @@ public class Tower : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float range = 0;
-    //[SerializeField] private float damage = 0;
     [SerializeField] private float timeBetweenShots = 0; // Time in seconds between shots
     private float nextTimeToShoot;
 
@@ -60,7 +59,7 @@ public class Tower : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         UpdateNearestEnemy();
 

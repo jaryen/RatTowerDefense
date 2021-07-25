@@ -14,7 +14,7 @@ public class BasicTower : Tower
         GameObject newBullet = Instantiate(bullet, barrel.position, pivot.rotation);
         Bullet bulletScript = newBullet.GetComponent<Bullet>();
 
-        if (bulletScript != null)
+        if (bulletScript)
         {
             bulletScript.Seek(currentTarget.transform);
         }

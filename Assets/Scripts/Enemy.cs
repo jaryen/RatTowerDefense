@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public HealthManager healthManager;
 
     [Header("Attributes")]
-    [SerializeField] private float enemyHealth;
+    [SerializeField] public float enemyHealth;
     [SerializeField] private float movementSpeed = 0;
     [SerializeField] private int killReward = 0; // Amount of money player gains when enemy killed
     [SerializeField] private int damage = 0; // The amount of damage enemy does when it reaches end
