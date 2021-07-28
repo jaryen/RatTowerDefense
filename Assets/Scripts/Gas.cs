@@ -18,4 +18,9 @@ public class Gas : MonoBehaviour
             }
         }
     }
+
+    private void PoisonEffect()
+    {
+
+    }
 }

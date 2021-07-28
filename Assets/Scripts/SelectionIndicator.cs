@@ -5,14 +5,15 @@ using UnityEngine.EventSystems;
 
 public class SelectionIndicator : MonoBehaviour
 {
+    [Header("Unity Setup Fields")]
     public GameObject hoveredObject;
     public GameObject selectedObject;
-
-    [Header("Unity Setup Fields")]
     public Transform turretUI;
     public LayerMask towerMask;
 
-    private Color originalCol;
+    // Other fields
+    private Color selectedColor;
+    private Color hoveredColor;
     private Camera mainCamera;
 
     private void Start()
@@ -32,15 +33,13 @@ public class SelectionIndicator : MonoBehaviour
     private void HoverObject(GameObject obj)
     {
         // If a object that has been hovered over exists
-        if (hoveredObject != null)
+        if (hoveredObject)
         {
             // If there already is a hovered obj and the currently
             // hovered obj is equal to it, then do return.
             // Else, clear the pre-existing hover obj and set the 
             // hoverObject = obj
-            if (obj == hoveredObject)
-                return;
-
+            if (obj == hoveredObject) return;
             ClearHover();
         }
         hoveredObject = obj;
@@ -49,7 +48,7 @@ public class SelectionIndicator : MonoBehaviour
         // prevColor
         SpriteRenderer sr = hoveredObject.GetComponent<SpriteRenderer>();
         Color srCol = sr.color;
-        originalCol = srCol;
+        hoveredColor = srCol;
 
         sr.color = Color.red;
     }
@@ -59,15 +58,14 @@ public class SelectionIndicator : MonoBehaviour
         // If a selected object ALREADY exists, then 
         // set existing one to null and return its color
         // back to original color.
-        if (selectedObject != null)
+        if (selectedObject)
         {
-            if (obj == selectedObject)
-                return;
-
+            if (obj == selectedObject) return;
             ClearSelect();
         }
         selectedObject = obj;
 
+        selectedColor = hoveredColor;
         SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
         sr.color = Color.yellow;
 
@@ -76,22 +74,20 @@ public class SelectionIndicator : MonoBehaviour
 
     private void ClearHover()
     {
-        if (hoveredObject == null)
-            return;
+        if (!hoveredObject) return;
 
         SpriteRenderer sr = hoveredObject.GetComponent<SpriteRenderer>();
-        sr.color = originalCol;
+        sr.color = hoveredColor;
 
         hoveredObject = null;
     }
 
     private void ClearSelect()
     {
-        if (selectedObject == null)
-            return;
+        if (selectedObject == null) return;
 
         SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
-        sr.color = originalCol;
+        sr.color = selectedColor;
 
         selectedObject = null;
     }
@@ -101,7 +97,7 @@ public class SelectionIndicator : MonoBehaviour
         Vector2 mousePosition = GetMousePosition();
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, new Vector2(0, 0), 0.1f, towerMask, -100, 100);
 
-        if (hit.collider != null)
+        if (hit.collider)
         {
             // Get the gameobject corresponding to the tower hit by ray
             GameObject hitObject = hit.transform.root.gameObject;
@@ -116,9 +112,11 @@ public class SelectionIndicator : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 SelectObject(hitObject);
+
                 Transform selectedObjPos = selectedObject.transform;
                 Vector3 offsetPos = new Vector3(selectedObjPos.position.x, selectedObjPos.position.y + selectedObject.transform.localScale.y/2);
                 Vector3 screenPos = mainCamera.WorldToScreenPoint(offsetPos);
+
                 turretUI.position = screenPos;
                 turretUI.gameObject.SetActive(true);
             }
@@ -129,16 +127,16 @@ public class SelectionIndicator : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                if (selectedObject != null)
+                if (selectedObject)
                 {
                     SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
-                    sr.color = originalCol;
+                    sr.color = selectedColor;
                     selectedObject = null;
                 }
             }
         }
 
-        if (selectedObject == null)
+        if (!selectedObject)
         {
             turretUI.gameObject.SetActive(false);
         }
