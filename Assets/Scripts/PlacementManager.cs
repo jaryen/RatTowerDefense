@@ -148,7 +148,7 @@ public class PlacementManager : MonoBehaviour
         }
 
         isBuilding = true;
-        dummyPlacement = Instantiate(currentDummyTower, GetMousePosition(), Quaternion.identity); // dummyTower = currentDummyTower
+        dummyPlacement = Instantiate(currentDummyTower, GetMousePosition(), Quaternion.identity);
     }
 
     public void EndBuilding()

@@ -5,19 +5,19 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [Header("Attributes")]
-    [SerializeField] private float range = 0;
-    [SerializeField] private float timeBetweenShots = 0; // Time in seconds between shots
-    private float nextTimeToShoot;
+    [SerializeField] protected float range = 0;
+    [SerializeField] protected float timeBetweenShots = 0; // Time in seconds between shots
+    protected float nextTimeToShoot;
 
     public GameObject currentTarget;
 
-    private void Start()
+    protected virtual void Start()
     {
         nextTimeToShoot = Time.time;
     }
 
     // Gets the current nearest enemy to tower
-    private void UpdateNearestEnemy()
+    protected void UpdateNearestEnemy()
     {
         GameObject currentNearestEnemy = null;
         float distance = Mathf.Infinity;

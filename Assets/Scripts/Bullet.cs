@@ -9,16 +9,6 @@ public class Bullet : MonoBehaviour
 
     private Transform target;
 
-/*    private void Start()
-    {
-        Destroy(gameObject, 10f); // Destroys bullet 10 sec after instantiation
-    }*/
-
-/*    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
-    }*/
-
     public void Seek(Transform _target)
     {
         target = _target;
