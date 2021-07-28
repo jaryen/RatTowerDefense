@@ -29,7 +29,8 @@ public class GasTower : Tower
         {
             if (gasCircle.transform.localScale.magnitude + expandRate > maxRadius.magnitude)
             {
-                gasCircle.transform.localScale += new Vector3(maxRadius.magnitude - gasCircle.transform.localScale.magnitude,
+                gasCircle.transform.localScale += 
+                    new Vector3(maxRadius.magnitude - gasCircle.transform.localScale.magnitude,
                     maxRadius.magnitude - gasCircle.transform.localScale.magnitude);
             }
             else
@@ -37,7 +38,6 @@ public class GasTower : Tower
                 gasCircle.transform.localScale += new Vector3(expandRate, expandRate);
             }
 
-            Debug.Log("Max radius reached: " + gasCircle.transform.localScale);
             yield return null;
         }
 

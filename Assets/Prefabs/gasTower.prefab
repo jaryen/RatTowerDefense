@@ -112,7 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10e9ab0557f5be49acdad53430ed18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 20
+  poisonDamage: 3
+  poisonDuration: 3
+  poisonRate: 1
 --- !u!50 &4279200454095683905
 Rigidbody2D:
   serializedVersion: 4
@@ -452,8 +455,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 1.75
-  timeBetweenShots: 1
+  timeBetweenShots: 2
   currentTarget: {fileID: 0}
   maxRadius: {x: 0, y: 0, z: 0}
   gasCircle: {fileID: 3750873115905951107}
-  expandRate: 0.4
+  expandRate: 0.3
