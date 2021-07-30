@@ -15,6 +15,8 @@ public class GasTower : Tower
     {
         base.Start();
 
+        // Add a parent object to gas game object
+        // Helps scale gas correctly
         GameObject gasParent = new GameObject();
         gasParent.transform.parent = gameObject.transform;
         gasCircle.transform.parent = gasParent.transform;

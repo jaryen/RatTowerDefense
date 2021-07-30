@@ -22,6 +22,10 @@ public class PlacementManager : MonoBehaviour
     [Header("Gas Tower Fields")]
     public GameObject dummyGasTower;
     public GameObject actualGasTower;
+    
+    [Header("Glue Tower Fields")]
+    public GameObject dummyGlueTower;
+    public GameObject actualGlueTower;
 
     [Header("During Game")]
     public bool isBuilding;
@@ -35,6 +39,7 @@ public class PlacementManager : MonoBehaviour
     {
         currentTower = tower;
 
+        // Should probably fix this someday
         if (tower.name.Equals("gunTower"))
         {
             currentDummyTower = dummyTower;
@@ -46,6 +51,10 @@ public class PlacementManager : MonoBehaviour
         else if (tower.name.Equals("gasTower"))
         {
             currentDummyTower = dummyGasTower;
+        }
+        else if (tower.name.Equals("glueTower"))
+        {
+            currentDummyTower = dummyGlueTower;
         }
     }
 
@@ -111,15 +120,14 @@ public class PlacementManager : MonoBehaviour
 
     public void PlaceBuilding()
     {
-        if (hoverTile != null)
+        if (hoverTile)
         {
             // If there's no tower in the current tile
-            if (CheckForTower() == false)
+            if (!CheckForTower())
             {
                 if (shopManager.CanBuyTower(currentTower))
                 {
                     GameObject newTowerObject = Instantiate(currentTower);
-                    // newTowerObject.layer = LayerMask.NameToLayer("Tower");
                     newTowerObject.transform.position = hoverTile.transform.position;
 
                     EndBuilding();
@@ -180,16 +188,16 @@ public class PlacementManager : MonoBehaviour
 
     public void Update()
     {
-        if (isBuilding == true)
+        if (isBuilding)
         {
-            if (dummyPlacement != null)
+            if (dummyPlacement)
             {
                 // Get the current map tile the mouse is hovering
                 // over.
                 GetCurrentHovertile();
 
                 // If mouse is currently hovering over a map tile
-                if (hoverTile != null)
+                if (hoverTile)
                 {
                     // Snaps the position of the dummy tower
                     // to the same position as the current tile 

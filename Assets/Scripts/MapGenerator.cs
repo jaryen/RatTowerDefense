@@ -30,10 +30,10 @@ public class MapGenerator : MonoBehaviour
     {
         mapTiles.Clear();
         pathTiles.Clear();
-        generateMap();
+        GenerateMap();
     }
 
-    private List<GameObject> getTopEdgeTiles()
+    private List<GameObject> GetTopEdgeTiles()
     {
         List<GameObject> edgeTiles = new List<GameObject>();
 
@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour
         return edgeTiles;
     }
 
-    private List<GameObject> getBottomEdgeTiles()
+    private List<GameObject> GetBottomEdgeTiles()
     {
         List<GameObject> edgeTiles = new List<GameObject>();
 
@@ -55,7 +55,7 @@ public class MapGenerator : MonoBehaviour
         return edgeTiles;
     }
 
-    private void moveLeft()
+    private void MoveLeft()
     {
         // Add the current tile into the path tiles list
         pathTiles.Add(currentTile);
@@ -66,7 +66,7 @@ public class MapGenerator : MonoBehaviour
         currentTile = mapTiles[nextIndex];
     }
 
-    private void moveRight()
+    private void MoveRight()
     {
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
@@ -74,7 +74,7 @@ public class MapGenerator : MonoBehaviour
         currentTile = mapTiles[nextIndex];
     }
 
-    private void moveDown()
+    private void MoveDown()
     {
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
@@ -82,7 +82,7 @@ public class MapGenerator : MonoBehaviour
         currentTile = mapTiles[nextIndex];
     }
 
-    private void generateMap()
+    private void GenerateMap()
     {
         for (int y = 0; y < mapHeight; y++)
         {
@@ -96,8 +96,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         // Get top and bottom edge tiles
-        List<GameObject> topEdgeTiles = getTopEdgeTiles();
-        List<GameObject> bottomEdgeTiles = getBottomEdgeTiles();
+        List<GameObject> topEdgeTiles = GetTopEdgeTiles();
+        List<GameObject> bottomEdgeTiles = GetBottomEdgeTiles();
 
         // Get a random start and end tile (for path)
         int rand1 = Random.Range(0, mapWidth);
@@ -113,7 +113,7 @@ public class MapGenerator : MonoBehaviour
         int randNum = Random.Range(1, mapHeight/2);
         for (int i = 0; i < randNum; i++)
         {
-            moveDown();
+            MoveDown();
         }
         
         int loopCount = 0;
@@ -127,11 +127,11 @@ public class MapGenerator : MonoBehaviour
             }
             if (currentTile.transform.position.x > endTile.transform.position.x)
             {
-                moveLeft();
+                MoveLeft();
             }
             else if (currentTile.transform.position.x < endTile.transform.position.x)
             {
-                moveRight();
+                MoveRight();
             }
             else
             {
@@ -143,7 +143,7 @@ public class MapGenerator : MonoBehaviour
         {
             if (currentTile.transform.position.y > endTile.transform.position.y)
             {
-                moveDown();
+                MoveDown();
             }
             else
             {
