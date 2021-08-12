@@ -26,6 +26,10 @@ public class PlacementManager : MonoBehaviour
     [Header("Glue Tower Fields")]
     public GameObject dummyGlueTower;
     public GameObject actualGlueTower;
+    
+    [Header("Flamethrower Tower Fields")]
+    public GameObject dummyFlameTower;
+    public GameObject actualFlameTower;
 
     [Header("During Game")]
     public bool isBuilding;
@@ -55,6 +59,10 @@ public class PlacementManager : MonoBehaviour
         else if (tower.name.Equals("glueTower"))
         {
             currentDummyTower = dummyGlueTower;
+        }
+        else if (tower.name.Equals("flameTower"))
+        {
+            currentDummyTower = dummyFlameTower;
         }
     }
 

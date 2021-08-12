@@ -18,30 +18,28 @@ public class Gas : MonoBehaviour
             if (e)
             {
                 e.TakeDamage(damage);
-                StartCoroutine(PoisonEffect(e));
+                e.StartCoroutine(PoisonEffect(e));
             }
         }
     }
 
-    private IEnumerator PoisonEffect(Enemy enemy)
+    private IEnumerator PoisonEffect(Enemy e)
     {
-        if (enemy)
+        if (e)
         {
-            SpriteRenderer enemySR = enemy.gameObject.GetComponent<SpriteRenderer>();
+            SpriteRenderer enemySR = e.gameObject.GetComponent<SpriteRenderer>();
             enemySR.color = Color.green;
 
             for (float i = 0; i < poisonDuration; i += poisonRate)
             {
                 yield return new WaitForSeconds(poisonRate);
-                if (enemy)
+                if (e)
                 {
-                    enemy.TakeDamage(poisonDamage);
+                    e.TakeDamage(poisonDamage);
                 }
-                
-                //Debug.Log("Took " + poisonDamage + " damage");
             }
 
-            if (enemy)
+            if (e)
             {
                 enemySR.color = Color.white;
             }

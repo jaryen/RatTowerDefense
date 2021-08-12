@@ -317,9 +317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2
-  timeBetweenShots: 4
+  timeBetweenShots: 7
   currentTarget: {fileID: 0}
-  mapGenerator: {fileID: 0}
   glue: {fileID: 1878794661606919352, guid: aff057758b2769c43b289cb85d7dbbbf, type: 3}
   pathTilesInRange: []
   glueSpeed: 20

@@ -103,6 +103,9 @@ MonoBehaviour:
   movementSpeed: 1.75
   killReward: 50
   damage: 1
+  isGlued: 0
+  startGlueTime: 3
+  glueTime: 0
 --- !u!61 &7457195128960400060
 BoxCollider2D:
   m_ObjectHideFlags: 0

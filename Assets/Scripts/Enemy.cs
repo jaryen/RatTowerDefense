@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Unity Setup Fields")]
     public MoneyManager moneyManager;
     public HealthManager healthManager;
 
@@ -15,6 +16,9 @@ public class Enemy : MonoBehaviour
 
     private GameObject targetTile;
     private Vector3 previousPos;
+
+    [Header("Status Attributes")]
+    public bool isGlued;
 
     private void Awake()
     {
@@ -53,7 +57,8 @@ public class Enemy : MonoBehaviour
 
     private void MoveEnemy()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetTile.transform.position, movementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, 
+            targetTile.transform.position, movementSpeed * Time.deltaTime);
 
         // Set current direction
         Vector3 currentPos = transform.position;
@@ -104,6 +109,13 @@ public class Enemy : MonoBehaviour
         }
 
         return false;
+    }
+
+    public float GetSpeed() { return movementSpeed; }
+
+    public void SetSpeed(float speed)
+    {
+        movementSpeed = speed;
     }
 
     private void Update()
