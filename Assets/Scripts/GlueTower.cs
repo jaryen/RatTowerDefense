@@ -36,15 +36,6 @@ public class GlueTower : Tower
     {
         // Get all path tiles in range
         // of the glue tower.
-        /*        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
-                foreach (Collider2D hitCollider in hitColliders)
-                {
-                    if (MapGenerator.pathTiles.Contains(hitCollider.gameObject))
-                    {
-                        pathTilesInRange.Add(hitCollider.gameObject);
-                    }
-                }*/
-
         foreach (GameObject pathTile in MapGenerator.pathTiles)
         {
             if ((pathTile.transform.position - transform.position).magnitude <= range)

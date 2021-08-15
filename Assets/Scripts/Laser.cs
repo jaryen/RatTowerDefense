@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
     {
         Enemy e = enemy.GetComponent<Enemy>();
 
-        if (e != null)
+        if (e)
         {
             e.TakeDamage(damage * Time.deltaTime);
         }
