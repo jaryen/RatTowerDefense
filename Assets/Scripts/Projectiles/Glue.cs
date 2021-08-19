@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Glue : MonoBehaviour
 {
+    [Header("Unity Setup Fields")]
+    public Sprite glueSplat;
+
     [Header("Attributes")]
     [SerializeField] private float glueSpeed = 0.1f;
     [SerializeField] private float totalOffset = 0.25f;
@@ -82,6 +85,13 @@ public class Glue : MonoBehaviour
         Vector3 randomPosOnTile = new Vector3(randX, randY);
 
         transform.position = Vector3.Lerp(gameObject.transform.position,
-            randomPosOnTile, glueSpeed); //targetTile.transform.position
+            randomPosOnTile, glueSpeed);
+
+        if (gameObject.transform.position == randomPosOnTile)
+        {
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = glueSplat;
+            transform.localScale = new Vector3(0.6f, 0.6f, 1);
+        }
     }
 }

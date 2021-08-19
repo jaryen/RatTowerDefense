@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    [Header("Unity Setup Fields")]
     public GameObject mapTile;
+    public Sprite pathSprite;
 
+    [Header("Attributes")]
     [SerializeField] private int mapWidth = 0;
     [SerializeField] private int mapHeight = 0;
+    public Color pathColor;
+    public Color startTileColor;
+    public Color endTileColor;
 
     public static List<GameObject> mapTiles = new List<GameObject>();
     public static List<GameObject> pathTiles = new List<GameObject>();
@@ -21,10 +27,6 @@ public class MapGenerator : MonoBehaviour
     private GameObject currentTile;
     private int currentIndex;
     private int nextIndex;
-
-    public Color pathColor;
-    public Color startTileColor;
-    public Color endTileColor;
 
     private void Start()
     {
@@ -59,9 +61,11 @@ public class MapGenerator : MonoBehaviour
     {
         // Add the current tile into the path tiles list
         pathTiles.Add(currentTile);
+
         // Get the index of the current tile
         currentIndex = mapTiles.IndexOf(currentTile);
         nextIndex = currentIndex-1;
+
         // Set current tile equal to the next tile
         currentTile = mapTiles[nextIndex];
     }
@@ -154,7 +158,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach(GameObject obj in pathTiles)
         {
-            obj.GetComponent<SpriteRenderer>().color = pathColor;
+            obj.GetComponent<SpriteRenderer>().sprite = pathSprite;
         }
 
         // Set start and end tile colors

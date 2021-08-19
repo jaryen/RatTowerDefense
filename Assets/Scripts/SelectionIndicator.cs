@@ -46,7 +46,7 @@ public class SelectionIndicator : MonoBehaviour
 
         // Set the original color of game object to 
         // prevColor
-        SpriteRenderer sr = hoveredObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = hoveredObject.GetComponentInChildren<SpriteRenderer>();
         Color srCol = sr.color;
         hoveredColor = srCol;
 
@@ -66,7 +66,7 @@ public class SelectionIndicator : MonoBehaviour
         selectedObject = obj;
 
         selectedColor = hoveredColor;
-        SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = selectedObject.GetComponentInChildren<SpriteRenderer>();
         sr.color = Color.yellow;
 
         hoveredObject = null;
@@ -76,7 +76,7 @@ public class SelectionIndicator : MonoBehaviour
     {
         if (!hoveredObject) return;
 
-        SpriteRenderer sr = hoveredObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = hoveredObject.GetComponentInChildren<SpriteRenderer>();
         sr.color = hoveredColor;
 
         hoveredObject = null;
@@ -86,7 +86,7 @@ public class SelectionIndicator : MonoBehaviour
     {
         if (selectedObject == null) return;
 
-        SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = selectedObject.GetComponentInChildren<SpriteRenderer>();
         sr.color = selectedColor;
 
         selectedObject = null;
@@ -129,7 +129,7 @@ public class SelectionIndicator : MonoBehaviour
             {
                 if (selectedObject)
                 {
-                    SpriteRenderer sr = selectedObject.GetComponent<SpriteRenderer>();
+                    SpriteRenderer sr = selectedObject.GetComponentInChildren<SpriteRenderer>();
                     sr.color = selectedColor;
                     selectedObject = null;
                 }

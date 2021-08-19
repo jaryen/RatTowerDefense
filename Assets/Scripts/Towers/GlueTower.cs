@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlueTower : Tower
 {
     [Header("Unity Setup Fields")]
-    public GameObject glue;
+    public GameObject glueProjectile;
 
     [Header("Attributes")]
     public List<GameObject> pathTilesInRange = new List<GameObject>();
@@ -20,7 +20,7 @@ public class GlueTower : Tower
 
     protected override void Shoot()
     {
-        GameObject newGlue = Instantiate(glue, gameObject.transform);
+        GameObject newGlue = Instantiate(glueProjectile, gameObject.transform);
         Glue glueScript = newGlue.GetComponent<Glue>();
 
         int randIndex = Random.Range(0, pathTilesInRange.Count);
