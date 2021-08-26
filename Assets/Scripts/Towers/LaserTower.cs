@@ -5,14 +5,15 @@ using UnityEngine;
 public class LaserTower : Tower
 {
     [Header("Unity Setup Fields")]
-    //public Transform pivot;
     public Transform firePoint;
     public LineRenderer lineRenderer;
     public Laser laser;
+    public AudioSource laserAudio;
 
     protected override void Shoot()
     {
         laser.DamageEnemy(currentTarget.transform);
+        laserAudio.Play();
 
         lineRenderer.enabled = true;
         lineRenderer.useWorldSpace = true;

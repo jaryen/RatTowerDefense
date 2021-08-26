@@ -8,9 +8,11 @@ public class BasicTower : Tower
     public Transform firePoint;
     public GameObject bullet;
     public Animator shootAnimController;
+    public AudioSource gunShotAudio;
 
     protected override void Shoot()
     {
+        gunShotAudio.Play();
         shootAnimController.SetTrigger("shoot");
         GameObject newBullet = Instantiate(bullet, firePoint.position, transform.rotation);
         newBullet.transform.localRotation *= Quaternion.Euler(new Vector3(0, 0, -90));

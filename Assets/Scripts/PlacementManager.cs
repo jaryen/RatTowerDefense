@@ -10,8 +10,10 @@ public class PlacementManager : MonoBehaviour
     public LayerMask towerMask;
     public ShopManager shopManager;
     public SelectionIndicator selectionIndicator;
-    public AudioSource audioSource;
-    public AudioClip audioClip;
+
+    // Audio Source
+    public AudioSource placeTowerAudio;
+    public AudioSource clickedBtnAudio;
 
     [Header("Gun Tower Fields")]
     public GameObject dummyTower;
@@ -139,7 +141,7 @@ public class PlacementManager : MonoBehaviour
                 {
                     GameObject newTowerObject = Instantiate(currentTower);
                     newTowerObject.transform.position = hoverTile.transform.position;
-                    audioSource.Play();
+                    placeTowerAudio.Play();
 
                     EndBuilding();
                     shopManager.BuyTower(currentTower);
@@ -168,6 +170,7 @@ public class PlacementManager : MonoBehaviour
 
         isBuilding = true;
         dummyPlacement = Instantiate(currentDummyTower, GetMousePosition(), Quaternion.identity);
+        clickedBtnAudio.Play();
     }
 
     public void EndBuilding()

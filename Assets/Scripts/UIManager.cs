@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("Unity Setup Fields")]
     public GameObject cancelButton;
+    public AudioSource cancelBtnAudio;
 
     private PlacementManager placementManager;
 
@@ -18,8 +19,9 @@ public class UIManager : MonoBehaviour
 
     public void cancelButtonPressed()
     {
-        if (placementManager.dummyPlacement != null)
+        if (placementManager.dummyPlacement)
         {
+            cancelBtnAudio.Play();
             Destroy(placementManager.dummyPlacement);
             placementManager.isBuilding = false;
         }

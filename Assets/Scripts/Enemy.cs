@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [Header("Unity Setup Fields")]
     public MoneyManager moneyManager;
     public HealthManager healthManager;
+    public AudioSource ratAudioSource;
+    public AudioClip[] ratSounds;
 
     [Header("Attributes")]
     [SerializeField] public float enemyHealth;
@@ -104,6 +106,9 @@ public class Enemy : MonoBehaviour
     {
         if (transform.position == MapGenerator.endTile.transform.position)
         {
+            ratAudioSource.clip = ratSounds[Random.Range(0, ratSounds.Length)];
+            ratAudioSource.Play();
+
             Die();
             return true;
         }
